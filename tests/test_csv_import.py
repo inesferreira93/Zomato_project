@@ -1,18 +1,18 @@
 import csv
-from config import ZOMATO_TABLE
+import config as configs
 from utils.csv_utils import extract_restaurant_data 
 
 def test_csv_import(database):
     """Testing the data from CSB was imported to the DB"""
     conn, cursor = database
-    csv_file_path = "./dataset/zomato.csv"
+    csv_file_path = configs.CSV_FILE_PATH
 
     # Importing the CSV to DB
     from services.csv_importer import import_csv_to_db
     import_csv_to_db(csv_file_path, conn, cursor) 
 
     # Reading data from DB
-    cursor.execute(f"SELECT * FROM {ZOMATO_TABLE["TABLE_NAME"]}")
+    cursor.execute(f"SELECT * FROM {configs.ZOMATO_TABLE["TABLE_NAME"]}")
     db_rows = cursor.fetchall()
 
     # Reading the data from CSV

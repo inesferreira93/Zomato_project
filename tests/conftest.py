@@ -3,8 +3,11 @@ from config import ZOMATO_TABLE
 
 test_db_path = "tests/test_data/test_restaurants.db"
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def database():
+    if os.path.exists(test_db_path):
+        os.remove(test_db_path)
+
     """Creating a dabatase to test"""
     
     # Create the folder if it doesn't exists
@@ -28,6 +31,3 @@ def database():
 
     yield conn, cursor
     conn.close()
-
-    if os.path.exists(test_db_path):
-        os.remove(test_db_path)
