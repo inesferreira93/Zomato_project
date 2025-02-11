@@ -1,5 +1,6 @@
 import csv
-from config import TABLE_NAME
+from config import ZOMATO_TABLE
+from utils.csv_utils import extract_restaurant_data 
 
 def test_csv_import(database):
     """Testing the data from CSB was imported to the DB"""
@@ -11,24 +12,13 @@ def test_csv_import(database):
     import_csv_to_db(csv_file_path, conn, cursor) 
 
     # Reading data from DB
-    cursor.execute(f"SELECT * FROM {TABLE_NAME}")
+    cursor.execute(f"SELECT * FROM {ZOMATO_TABLE["TABLE_NAME"]}")
     db_rows = cursor.fetchall()
 
     # Reading the data from CSV
     with open(csv_file_path, mode='r', encoding='utf-8') as file:
         reader = csv.DictReader(file)
-        csv_data = [
-            (
-                row['name'],
-                row['online_order'],
-                row['book_table'],
-                row['rate'],
-                int(row['votes']),
-                int(row['approx_cost(for two people)']),
-                row['listed_in(type)']
-            )
-            for row in reader
-        ]
+        csv_data = [extract_restaurant_data(row) for row in reader]
 
     # Make sure the column data is the same that csv file
     assert db_rows == csv_data

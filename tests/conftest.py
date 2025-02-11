@@ -1,5 +1,5 @@
 import sqlite3, os, pytest
-from config import TABLE_NAME
+from config import ZOMATO_TABLE
 
 test_db_path = "tests/test_data/test_restaurants.db"
 
@@ -15,7 +15,7 @@ def database():
     cursor = conn.cursor()
 
     cursor.execute(f'''
-    CREATE TABLE IF NOT EXISTS {TABLE_NAME} (
+    CREATE TABLE IF NOT EXISTS {ZOMATO_TABLE["TABLE_NAME"]} (
         name TEXT,
         online_order TEXT,
         book_table TEXT,
