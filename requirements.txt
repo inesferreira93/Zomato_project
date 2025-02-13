@@ -1,6 +1,6 @@
-gherkin-official
-pytest
-pytest-bdd
-python-dotenv
 selenium
 webdriver-manager
+pytest
+gherkin-official
+pytest-bdd
+python-dotenv

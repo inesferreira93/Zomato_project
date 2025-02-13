@@ -29,27 +29,23 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
-          python -m pip install --upgrade pip
           python -m venv venv
           source venv/bin/activate
-          pip install --upgrade pip
           pip install -r requirements.txt
         
       - name: Finishing the Chrome process (if exists)
         run: |
-          pkill -9 chrome || true  # Make sure the old processes are finalized
+          pkill -9 chrome || true
           ps aux | grep chrome
 
       - name: Run the tests
         run: |
           source venv/bin/activate
-          pytest --maxfail=1 --disable-warnings --tb=short
+          pytest -s
 
-      - name: Upload test artifacts (logs/screenshots)
-              if: failure()
-              uses: actions/upload-artifact@v3
-              with:
-                name: test-artifacts
-                path: |
-                  screenshots/*.png
-                  logs/test_log.txt
+      - name: Upload Screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: "*.png"
