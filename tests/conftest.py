@@ -50,6 +50,13 @@ def get_driver(headless=True):
     chrome_options.add_argument("--disable-dev-shm-usage")  # Avoid the memory problems
     chrome_options.add_argument("--headless=new") 
     chrome_options.add_argument("--window-size=1920,1080")
+    # Configurations to avoid automation detection
+    chrome_options.add_argument("--disable-blink-features=AutomationControlled")
+    chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
+    chrome_options.add_argument("--disable-infobars")
+    # configure the locations
+    chrome_options.add_argument("--lang=en-US")
+    chrome_options.add_argument("--geo=US")
 
     service = Service(ChromeDriverManager().install())
     # Adding the headless mode, if necessary
