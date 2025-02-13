@@ -29,27 +29,9 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
-          
-          # Exctrating the main version
-          CHROME_MAJOR_VERSION=$(google-chrome --version | grep -oE '[0-9]+' | head -n1)
-          
-          # Obtain the ChromeDriver version
-          CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_MAJOR_VERSION")
-          
-          # Download and install
-          wget "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
-          unzip chromedriver_linux64.zip
-          sudo mv chromedriver /usr/local/bin/
-          
-          # Configure the Python environment
           python -m venv venv
           source venv/bin/activate
           pip install -r requirements.txt
-
-      - name: Debug Chrome Version
-        run: |
-          echo "Versão do Chrome: $(google-chrome --version)"
-          echo "Versão principal: $CHROME_MAJOR_VERSION"
         
       - name: Finishing the Chrome process (if exists)
         run: |
