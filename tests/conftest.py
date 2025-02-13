@@ -47,6 +47,7 @@ def get_driver(headless=True):
     chrome_options = Options()
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--headless=new") 
     chrome_options.add_argument("--window-size=1920,1080")
     
     # avoid the automation detection
@@ -63,9 +64,13 @@ def get_driver(headless=True):
 
 @pytest.fixture
 def setup_driver():
-    driver = get_driver(os.getenv("HEADLESS")) # get the headless mode
-    yield driver
-    driver.quit()
+    try:
+        driver = get_driver(os.getenv("HEADLESS")) # get the headless mode
+        yield driver
+        driver.quit()
+    except Exception as e:
+        take_screenshot(driver, "text_example_failure")
+        raise e
 
 @pytest.fixture
 def base_url():
