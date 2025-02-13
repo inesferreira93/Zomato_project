@@ -29,9 +29,10 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
         
-      - name: Encerrar processos do Chrome (se existirem)
-        run: pkill -9 chrome || true  # Make sure the old processes are finalized
-
+      - name: Finishing the Chrome process (if exists)
+        run: |
+          pkill -9 chrome || true  # Make sure the old processes are finalized
+          ps aux | grep chrome
       - name: Run the tests
         run: |
           source venv/bin/activate
