@@ -65,5 +65,5 @@ def setup_driver():
 
 @pytest.fixture
 def base_url():
-    return "https://public.tableau.com/app/profile/pradeepkumar.g/viz/HRAttritionDashboardRWFD_16570446563570/viz"
+    return "https://www.activobank.pt/depositos-prazo-poupancas"
 
