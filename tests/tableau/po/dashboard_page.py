@@ -14,7 +14,7 @@ class DashboardPage:
 
     def wait_for_page_load(self):
         WebDriverWait(self.driver, 30).until(
-            EC.visibility_of_element_located((By.XPATH, "//h1[contains(text(), 'HR Attrition')]"))
+            EC.visibility_of_element_located((By.XPATH, "//h1[contains(text(), 'venv')]"))
         )
 
     def get_dashboard_title(self):

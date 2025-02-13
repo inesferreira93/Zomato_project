@@ -41,4 +41,4 @@ jobs:
       - name: Run the tests
         run: |
           source venv/bin/activate
-          pytest --maxfail=1 --disable-warnings --tb=short
+          pytest --timeout=300 -v

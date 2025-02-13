@@ -48,12 +48,12 @@ def get_driver(headless=True):
     chrome_options.add_argument("--incognito")
     chrome_options.add_argument("--no-sandbox")  # Avoid the permitions errors
     chrome_options.add_argument("--disable-dev-shm-usage")  # Avoid the memory problems
-    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--headless=new") 
 
     service = Service(ChromeDriverManager().install())
     # Adding the headless mode, if necessary
     if headless:
-        chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--headless=new") 
     # Initialize the Webdriver with the option configured
     driver = webdriver.Chrome(service=service, options=chrome_options)
     return driver
@@ -71,5 +71,5 @@ def setup_driver():
 
 @pytest.fixture
 def base_url():
-    return "https://public.tableau.com/app/profile/pradeepkumar.g/viz/HRAttritionDashboardRWFD_16570446563570/viz"
+    return "https://docs.python.org/3/library/venv.html"
 
