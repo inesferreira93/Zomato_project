@@ -42,15 +42,11 @@ def database():
 
 
 def get_driver(headless=True):
-    # creating an exclusive and temporary directory for each execution
-    unique_id = str(uuid.uuid4())
-    temp_dir = os.path.join(tempfile.gettempdir(), f"chrome_user_data_{unique_id}")
     # Configure the chrome options
     chrome_options = Options()
     chrome_options.add_argument("--incognito")
     chrome_options.add_argument("--no-sandbox")  # Avoid the permitions errors
     chrome_options.add_argument("--disable-dev-shm-usage")  # Avoid the memory problems
-    chrome_options.add_argument(f"--user-data-dir={temp_dir}")
 
     service = Service(ChromeDriverManager().install())
     # Adding the headless mode, if necessary
