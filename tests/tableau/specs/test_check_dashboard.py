@@ -14,16 +14,13 @@ def open_url(setup_driver, base_url):
     
 @when('the page is built')
 def reject_cookies(setup_driver):
-    print(1)
     dashboard = DashboardPage(setup_driver)
-    # time.sleep(15)
     dashboard.wait_for_page_load()
 
 @then('a title is shown')
 def check_title(setup_driver):
-    print(1)
-    # dashboard = DashboardPage(setup_driver)
-    # assert "HR Attrition Dashboard | VOTD | #IIBAwards'22" in dashboard.get_dashboard_title()
+    dashboard = DashboardPage(setup_driver)
+    assert "HR Attrition Dashboard | VOTD | #IIBAwards'22" in dashboard.get_dashboard_title()
 
 @then('the body are shown')
 def dashboards_are_shown(setup_driver):
