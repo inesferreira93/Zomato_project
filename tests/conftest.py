@@ -1,6 +1,14 @@
 import sqlite3, os, pytest
 from config import ZOMATO_TABLE
+from dotenv import load_dotenv
+from selenium import webdriver
+from pathlib import Path
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
 
+env_path = Path(__file__).resolve().parent.parent / "env" / ".env"
+load_dotenv(env_path)
 test_db_path = "tests/test_data/test_restaurants.db"
 
 @pytest.fixture(scope="session")
@@ -31,3 +39,26 @@ def database():
 
     yield conn, cursor
     conn.close()
+
+
+def get_driver(headless=True):
+    # Configure the chrome options
+    chrome_options = Options()
+    # Adding the headless mode, if necessary
+    if headless:
+        chrome_options.add_argument("--headless")
+    # Initialize the Webdriver with the option configured
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+    return driver
+
+@pytest.fixture
+def setup_driver():
+    driver = get_driver(os.getenv("HEADLESS")) 
+    driver.maximize_window()
+    yield driver
+    driver.quit()
+
+@pytest.fixture
+def base_url():
+    return "https://public.tableau.com/app/profile/pradeepkumar.g/viz/HRAttritionDashboardRWFD_16570446563570/viz"
+

@@ -3,7 +3,7 @@ from pytest_bdd import scenarios, given, when, then
 import csv
 import config as configs
 from utils.csv_utils import extract_restaurant_data 
-scenarios("../../features/validate_csv_imported.feature")
+scenarios("../../features/data_science/validate_csv_imported.feature")
 
 csv_file_path = configs.CSV_FILE_PATH
 

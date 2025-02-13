@@ -1,7 +1,7 @@
 import pytest
 from pytest_bdd import scenarios, given, when, then
 import config as configs
-scenarios("../../features/validate_rate_column.feature")
+scenarios("../../features/data_science/validate_rate_column.feature")
 
 @pytest.fixture(scope='function')
 def context():

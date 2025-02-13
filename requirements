@@ -1,0 +1,6 @@
+python -m pip install
+python -m venv /path/to/new/virtual/environment
+# activate it
+pip install selenium
+pip install webdriver-manager
+pip install python-dotenv
