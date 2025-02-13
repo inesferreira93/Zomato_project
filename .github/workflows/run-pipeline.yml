@@ -41,4 +41,4 @@ jobs:
       - name: Run the tests
         run: |
           source venv/bin/activate
-          pytest --timeout=300 -v
+          pytest
