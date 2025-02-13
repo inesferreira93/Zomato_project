@@ -28,7 +28,7 @@ class DashboardPage:
         self.driver.switch_to.frame(iframe)
 
     def job_role_combo(self):
-        dashboard_viewport = WebDriverWait(self.driver, 10).until(
+        dashboard_viewport = WebDriverWait(self.driver, 30).until(
             EC.presence_of_element_located((By.ID, "tabZoneId67"))
         )
         combo = WebDriverWait(dashboard_viewport, 10).until(
@@ -37,7 +37,7 @@ class DashboardPage:
         return combo
     
     def waitForClicacleAndClick(self):
-        combo_box_button = WebDriverWait(self.driver, 15).until(
+        combo_box_button = WebDriverWait(self.driver, 30).until(
             EC.element_to_be_clickable((By.CSS_SELECTOR, 'span[role="button"]'))
         )
         combo_box_button.click()
@@ -45,13 +45,13 @@ class DashboardPage:
 
     def get_job_role_combo_text(self):
         combo = self.job_role_combo()
-        comboText = WebDriverWait(combo, 20).until(
+        comboText = WebDriverWait(combo, 30).until(
             EC.presence_of_element_located((By.CSS_SELECTOR, "[class='tabComboBoxName']"))
         )
         return comboText.text
 
     def changeJobRole(self):
-        new_option = WebDriverWait(self.driver, 20).until(
+        new_option = WebDriverWait(self.driver, 30).until(
             EC.element_to_be_clickable((By.XPATH, "//span[text()='All Roles']"))
         )
         new_option.click()
