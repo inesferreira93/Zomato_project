@@ -10,8 +10,8 @@ on:
 
 jobs:
   tests:
-    runs-on: ubuntu-latest  
-    env: 
+    runs-on: ubuntu-latest
+    env:
       HEADLESS: "true"
     steps:
       - name: Checkout of the repository
@@ -20,7 +20,7 @@ jobs:
       - name: Python configurations
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'  
+          python-version: '3.13'  
 
       - name: Clean pip cache
         run: |
@@ -33,6 +33,9 @@ jobs:
           python -m venv venv
           source venv/bin/activate
           pip install -r requirements.txt
+
+      - name: Debug HEADLESS variable
+        run: echo "HEADLESS value: $HEADLESS"
         
       - name: Finishing the Chrome process (if exists)
         run: |
