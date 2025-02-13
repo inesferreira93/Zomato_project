@@ -48,7 +48,8 @@ def get_driver(headless=True):
     chrome_options.add_argument("--no-sandbox")  # Avoid the permitions errors
     chrome_options.add_argument("--disable-dev-shm-usage")  # Avoid the memory problems
 
-    service = Service(ChromeDriverManager().install())
+    driver_path = ChromeDriverManager(version="latest").install()
+    service = Service(driver_path)
     # Adding the headless mode, if necessary
     if headless:
         chrome_options.add_argument("--headless")
