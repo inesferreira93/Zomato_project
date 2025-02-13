@@ -28,8 +28,11 @@ jobs:
           source venv/bin/activate
           pip install --upgrade pip
           pip install -r requirements.txt
+        
+      - name: Encerrar processos do Chrome (se existirem)
+        run: pkill -9 chrome || true  # Make sure the old processes are finalized
 
       - name: Run the tests
         run: |
           source venv/bin/activate
-          pytest --maxfail=3 --disable-warnings --tb=short
+          pytest --maxfail=1 --disable-warnings --tb=short

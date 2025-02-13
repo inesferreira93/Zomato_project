@@ -42,17 +42,20 @@ def database():
 
 
 def get_driver(headless=True):
+    # Creating an exclusive and temporary directory to the Chrome
+    temp_dir = os.path.join(tempfile.gettempdir(), "chrome_user_data")
     # Configure the chrome options
     chrome_options = Options()
-    chrome_options.add_argument(f"--user-data-dir={tempfile.mkdtemp()}")
+    chrome_options.add_argument(f"--user-data-dir={temp_dir}")
     chrome_options.add_argument("--no-sandbox")  # Avoid the permitions errors
     chrome_options.add_argument("--disable-dev-shm-usage")  # Avoid the memory problems
 
+    service = Service(ChromeDriverManager().install())
     # Adding the headless mode, if necessary
     if headless:
         chrome_options.add_argument("--headless")
     # Initialize the Webdriver with the option configured
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+    driver = webdriver.Chrome(service=service, options=chrome_options)
     return driver
 
 @pytest.fixture
