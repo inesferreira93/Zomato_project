@@ -7,7 +7,7 @@ class DashboardPage:
         self.driver = driver
 
     def accept_cookies(self):
-        element = WebDriverWait(self.driver, 10).until(
+        element = WebDriverWait(self.driver, 30).until(
             EC.visibility_of_element_located((By.ID, "onetrust-button-group"))
         )
         element.click()
