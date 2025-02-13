@@ -16,7 +16,6 @@ def setup_database(database):
 def query_unique_values(database, context):
     conn, cursor = database
     table_name = configs.ZOMATO_TABLE["TABLE_NAME"]
-    print(table_name)
     column_name = "listed_in_type"
     cursor.execute(
         f"SELECT distinct {column_name} from ({table_name}) "

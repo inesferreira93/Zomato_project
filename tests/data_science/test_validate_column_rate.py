@@ -15,8 +15,9 @@ def setup_database(database):
 @when("I query the values of the 'rate' column")
 def query_unique_values(database, context):
     conn, cursor = database
+    table_name = configs.ZOMATO_TABLE["TABLE_NAME"]
     column_name = "rate"
-    cursor.execute(f'select {column_name} from {configs.ZOMATO_TABLE['TABLE_NAME']} WHERE {column_name} NOT LIKE "%/5";')
+    cursor.execute(f'select {column_name} from {table_name} WHERE {column_name} NOT LIKE "%/5";')
     context['rows'] = len(cursor.fetchall())
 
 @then("all values must be in the 'X/X' format")
