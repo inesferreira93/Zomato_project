@@ -22,7 +22,12 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt  
+          python -m venv venv
+          source venv/bin/activate
+          pip install --upgrade pip
+          pip install -r requirements.txt
 
       - name: Run the tests
-        run: pytest --maxfail=3 --disable-warnings --tb=short
+        run: |
+          source venv/bin/activate
+          pytest --maxfail=3 --disable-warnings --tb=short
