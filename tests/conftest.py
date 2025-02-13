@@ -1,4 +1,4 @@
-import sqlite3, os, pytest, tempfile, uuid # to generate the unique udentifiers
+import sqlite3, os, pytest
 from config import ZOMATO_TABLE
 from dotenv import load_dotenv
 from selenium import webdriver
@@ -48,8 +48,7 @@ def get_driver(headless=True):
     chrome_options.add_argument("--no-sandbox")  # Avoid the permitions errors
     chrome_options.add_argument("--disable-dev-shm-usage")  # Avoid the memory problems
 
-    driver_path = ChromeDriverManager(version="latest").install()
-    service = Service(driver_path)
+    service = Service(ChromeDriverManager().install())
     # Adding the headless mode, if necessary
     if headless:
         chrome_options.add_argument("--headless")
