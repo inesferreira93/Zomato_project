@@ -33,6 +33,7 @@ jobs:
         run: |
           pkill -9 chrome || true  # Make sure the old processes are finalized
           ps aux | grep chrome
+          
       - name: Run the tests
         run: |
           source venv/bin/activate

@@ -1,4 +1,4 @@
-import sqlite3, os, pytest, tempfile
+import sqlite3, os, pytest, tempfile, uuid # to generate the unique udentifiers
 from config import ZOMATO_TABLE
 from dotenv import load_dotenv
 from selenium import webdriver
@@ -43,7 +43,8 @@ def database():
 
 def get_driver(headless=True):
     # creating an exclusive and temporary directory for each execution
-    temp_dir = tempfile.mkdtemp()
+    unique_id = str(uuid.uuid4())
+    temp_dir = os.path.join(tempfile.gettempdir(), f"chrome_user_data_{unique_id}")
     # Configure the chrome options
     chrome_options = Options()
     chrome_options.add_argument("--incognito")
