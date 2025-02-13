@@ -10,7 +10,7 @@ def open_url(setup_driver, base_url):
     driver.get(base_url)
     dashboard = DashboardPage(driver)
     print(dashboard)
-    dashboard.accept_cookies()
+    #dashboard.accept_cookies()
     
 @when('the page is built')
 def reject_cookies(setup_driver):
