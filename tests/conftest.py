@@ -6,7 +6,7 @@ from pathlib import Path
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
-from utils.csv_utils import take_screenshot 
+from datetime import datetime
 
 env_path = Path(__file__).resolve().parent.parent / "env" / ".env"
 load_dotenv(env_path)
@@ -41,6 +41,25 @@ def database():
     yield conn, cursor
     conn.close()
 
+@pytest.hookimpl(hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    report = outcome.get_result()
+
+    if report.when == "call" and report.failed:
+        driver = getattr(item, "_driver", None)
+        if driver:
+            screenshot_dir = "screenshots"
+            os.makedirs(screenshot_dir, exist_ok=True)
+            
+            # generating the name
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            test_name = report.nodeid.split("::")[-1]
+            screenshot_path = os.path.join(screenshot_dir, f"FAILED_{test_name}_{timestamp}.png")
+            
+            # take the screenshot
+            driver.save_screenshot(screenshot_path)
+            print(f"Screenshot saved in: {screenshot_path}")
 
 def get_driver(headless=True):
     # Configure the chrome options
@@ -62,9 +81,10 @@ def get_driver(headless=True):
     return driver
 
 @pytest.fixture
-def setup_driver():
+def setup_driver(request):
     headless_env = os.getenv("HEADLESS", "true").strip().lower() in ("true", "1")
     driver = get_driver(headless=headless_env)
+    request.node._driver = driver
     yield driver
     driver.quit()
 
