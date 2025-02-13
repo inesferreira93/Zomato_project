@@ -1,4 +1,4 @@
-import sqlite3, os, pytest
+import sqlite3, os, pytest, tempfile
 from config import ZOMATO_TABLE
 from dotenv import load_dotenv
 from selenium import webdriver
@@ -44,6 +44,10 @@ def database():
 def get_driver(headless=True):
     # Configure the chrome options
     chrome_options = Options()
+    chrome_options.add_argument(f"--user-data-dir={tempfile.mkdtemp()}")
+    chrome_options.add_argument("--no-sandbox")  # Avoid the permitions errors
+    chrome_options.add_argument("--disable-dev-shm-usage")  # Avoid the memory problems
+
     # Adding the headless mode, if necessary
     if headless:
         chrome_options.add_argument("--headless")
@@ -53,7 +57,7 @@ def get_driver(headless=True):
 
 @pytest.fixture
 def setup_driver():
-    driver = get_driver(os.getenv("HEADLESS")) 
+    driver = get_driver(os.getenv("HEADLESS")) # get the headless mode
     driver.maximize_window()
     yield driver
     driver.quit()
