@@ -23,7 +23,7 @@ def query_unique_values(database, context):
     from services.csv_importer import import_csv_to_db
     import_csv_to_db(csv_file_path, conn, cursor) 
     # Reading data from DB
-    cursor.execute(f"SELECT * FROM {configs.ZOMATO_TABLE["TABLE_NAME"]}")
+    cursor.execute(f"SELECT * FROM {configs.ZOMATO_TABLE['TABLE_NAME']}")
     context['data'] = cursor.fetchall()
 
 @then("all values from CSV file must be imported to DB")
