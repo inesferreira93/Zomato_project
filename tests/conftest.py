@@ -42,11 +42,9 @@ def database():
 
 
 def get_driver(headless=True):
-    # Creating an exclusive and temporary directory to the Chrome
-    temp_dir = os.path.join(tempfile.gettempdir(), "chrome_user_data")
     # Configure the chrome options
     chrome_options = Options()
-    chrome_options.add_argument(f"--user-data-dir={temp_dir}")
+    chrome_options.add_argument("--incognito")
     chrome_options.add_argument("--no-sandbox")  # Avoid the permitions errors
     chrome_options.add_argument("--disable-dev-shm-usage")  # Avoid the memory problems
 
