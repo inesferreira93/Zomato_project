@@ -8,8 +8,9 @@ scenarios('../../../features/tableau/test_check_dashboard.feature')
 def open_url(setup_driver, base_url):
     driver = setup_driver
     driver.get(base_url)
-    dashboard = DashboardPage(driver)
-    dashboard.accept_cookies()
+    print ("the page was opened")
+    # dashboard = DashboardPage(driver)
+    # dashboard.accept_cookies()
     
 @when('the page is built')
 def reject_cookies(setup_driver):
