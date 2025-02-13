@@ -15,9 +15,11 @@ def setup_database(database):
 @when("I query the unique values of the 'listed_in_type' column")
 def query_unique_values(database, context):
     conn, cursor = database
+    table_name = configs.ZOMATO_TABLE["TABLE_NAME"]
+    print(table_name)
     column_name = "listed_in_type"
     cursor.execute(
-        f"SELECT distinct {column_name} from ({configs.ZOMATO_TABLE['TABLE_NAME']}) "
+        f"SELECT distinct {column_name} from ({table_name}) "
         f"where {column_name} NOT IN ('Cafes', 'Buffet', 'Dining', 'other')"
     )
     context['rows'] = len(cursor.fetchall())
