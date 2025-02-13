@@ -71,5 +71,5 @@ def setup_driver():
 
 @pytest.fixture
 def base_url():
-    return "https://docs.python.org/3/library/venv.html"
+    return "https://public.tableau.com/app/profile/pradeepkumar.g/viz/HRAttritionDashboardRWFD_16570446563570/viz"
 
