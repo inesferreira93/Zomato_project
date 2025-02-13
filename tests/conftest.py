@@ -63,7 +63,8 @@ def get_driver(headless=True):
 
 @pytest.fixture
 def setup_driver():
-    driver = os.getenv("HEADLESS", "true").strip().lower() in ("true", "1") # get the headless mode
+    headless_env = os.getenv("HEADLESS", "true").strip().lower() in ("true", "1")
+    driver = get_driver(headless=headless_env)
     yield driver
     driver.quit()
 
