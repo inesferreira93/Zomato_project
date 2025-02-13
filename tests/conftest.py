@@ -45,18 +45,13 @@ def database():
 def get_driver(headless=True):
     # Configure the chrome options
     chrome_options = Options()
-    chrome_options.add_argument("--incognito")
-    chrome_options.add_argument("--no-sandbox")  # Avoid the permitions errors
-    chrome_options.add_argument("--disable-dev-shm-usage")  # Avoid the memory problems
-    chrome_options.add_argument("--headless=new") 
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--window-size=1920,1080")
-    # Configurations to avoid automation detection
+    
+    # avoid the automation detection
     chrome_options.add_argument("--disable-blink-features=AutomationControlled")
     chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
-    chrome_options.add_argument("--disable-infobars")
-    # configure the locations
-    chrome_options.add_argument("--lang=en-US")
-    chrome_options.add_argument("--geo=US")
 
     service = Service(ChromeDriverManager().install())
     # Adding the headless mode, if necessary
@@ -68,13 +63,10 @@ def get_driver(headless=True):
 
 @pytest.fixture
 def setup_driver():
-    try:
-        driver = get_driver(os.getenv("HEADLESS")) # get the headless mode
-        yield driver
-        driver.quit()
-    except Exception as e:
-        take_screenshot(driver, "text_example_failure")
-        raise e
+    headless_env = os.getenv("HEADLESS", "true").strip().lower() in ("true", "1")
+    driver = get_driver(headless=headless_env)
+    yield driver
+    driver.quit()
 
 @pytest.fixture
 def base_url():

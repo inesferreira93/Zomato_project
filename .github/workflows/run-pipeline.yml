@@ -9,9 +9,10 @@ on:
       - main 
 
 jobs:
-  testes:
-    runs-on: ubuntu-latest  
-
+  tests:
+    runs-on: ubuntu-latest
+    env:
+      HEADLESS: "true"
     steps:
       - name: Checkout of the repository
         uses: actions/checkout@v4  
