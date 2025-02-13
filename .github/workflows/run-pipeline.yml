@@ -29,10 +29,8 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
-          python -m pip install --upgrade pip
           python -m venv venv
           source venv/bin/activate
-          pip install --upgrade pip
           pip install -r requirements.txt
         
       - name: Finishing the Chrome process (if exists)
@@ -44,12 +42,3 @@ jobs:
         run: |
           source venv/bin/activate
           pytest --maxfail=1 --disable-warnings --tb=short
-
-      - name: Upload test artifacts (logs/screenshots)
-              if: failure()
-              uses: actions/upload-artifact@v3
-              with:
-                name: test-artifacts
-                path: |
-                  screenshots/*.png
-                  logs/test_log.txt
