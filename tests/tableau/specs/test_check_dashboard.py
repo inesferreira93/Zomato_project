@@ -7,11 +7,11 @@ scenarios('../../../features/tableau/test_check_dashboard.feature')
 def open_url(setup_driver, base_url):
     driver = setup_driver
     driver.get(base_url)
-    # dashboard = DashboardPage(driver)
-    #try:
-    #    dashboard.accept_cookies()
-    #except NoSuchElementException:
-    #    print("Cookies pop-up doesn't found. Continuing...")
+    dashboard = DashboardPage(driver)
+    try:
+        dashboard.accept_cookies()
+    except NoSuchElementException:
+        print("Cookies pop-up doesn't found. Continuing...")
     
 @when('the page is built')
 def reject_cookies(setup_driver):
