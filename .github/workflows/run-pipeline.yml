@@ -29,13 +29,20 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
+          # Instala o ChromeDriver compatível com a versão do Chrome
+          CHROME_VERSION=$(google-chrome --version | awk '{print $3}')
+          CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION%.*}")
+          wget "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
+          unzip chromedriver_linux64.zip
+          sudo mv chromedriver /usr/local/bin/
+          # Configuração do ambiente Python
           python -m venv venv
           source venv/bin/activate
           pip install -r requirements.txt
         
       - name: Finishing the Chrome process (if exists)
         run: |
-          pkill -9 chrome || true  # Make sure the old processes are finalized
+          pkill -9 chrome || true
           ps aux | grep chrome
 
       - name: Run the tests

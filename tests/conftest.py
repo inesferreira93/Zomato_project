@@ -49,6 +49,7 @@ def get_driver(headless=True):
     chrome_options.add_argument("--no-sandbox")  # Avoid the permitions errors
     chrome_options.add_argument("--disable-dev-shm-usage")  # Avoid the memory problems
     chrome_options.add_argument("--headless=new") 
+    chrome_options.add_argument("--window-size=1920,1080")
 
     service = Service(ChromeDriverManager().install())
     # Adding the headless mode, if necessary
@@ -62,7 +63,6 @@ def get_driver(headless=True):
 def setup_driver():
     try:
         driver = get_driver(os.getenv("HEADLESS")) # get the headless mode
-        driver.maximize_window()
         yield driver
         driver.quit()
     except Exception as e:
