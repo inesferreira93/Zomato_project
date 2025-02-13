@@ -15,9 +15,9 @@ def open_url(setup_driver, base_url):
 @when('the page is built')
 def reject_cookies(setup_driver):
     print(1)
-    # dashboard = DashboardPage(setup_driver)
+    dashboard = DashboardPage(setup_driver)
     # time.sleep(15)
-    # dashboard.wait_for_page_load()
+    dashboard.wait_for_page_load()
 
 @then('a title is shown')
 def check_title(setup_driver):
