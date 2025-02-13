@@ -44,3 +44,12 @@ jobs:
         run: |
           source venv/bin/activate
           pytest --maxfail=1 --disable-warnings --tb=short
+
+      - name: Upload test artifacts (logs/screenshots)
+              if: failure()
+              uses: actions/upload-artifact@v3
+              with:
+                name: test-artifacts
+                path: |
+                  screenshots/*.png
+                  logs/test_log.txt

@@ -6,6 +6,7 @@ from pathlib import Path
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
+from utils.csv_utils import take_screenshot 
 
 env_path = Path(__file__).resolve().parent.parent / "env" / ".env"
 load_dotenv(env_path)
@@ -59,10 +60,14 @@ def get_driver(headless=True):
 
 @pytest.fixture
 def setup_driver():
-    driver = get_driver(os.getenv("HEADLESS")) # get the headless mode
-    driver.maximize_window()
-    yield driver
-    driver.quit()
+    try:
+        driver = get_driver(os.getenv("HEADLESS")) # get the headless mode
+        driver.maximize_window()
+        yield driver
+        driver.quit()
+    except Exception as e:
+        take_screenshot(driver, "text_example_failure")
+        raise e
 
 @pytest.fixture
 def base_url():
