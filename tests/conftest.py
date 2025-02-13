@@ -47,6 +47,7 @@ def get_driver(headless=True):
     chrome_options.add_argument("--incognito")
     chrome_options.add_argument("--no-sandbox")  # Avoid the permitions errors
     chrome_options.add_argument("--disable-dev-shm-usage")  # Avoid the memory problems
+    chrome_options.add_argument("--headless")
 
     service = Service(ChromeDriverManager().install())
     # Adding the headless mode, if necessary
