@@ -38,7 +38,8 @@ jobs:
 
       - name: Run the tests
         run: |
-          pytest -v --bdd-report report
+          pytest --html=report.html
+
       
       - name: Upload of the html HTML repost as artifact
         uses: actions/upload-artifact@v4
