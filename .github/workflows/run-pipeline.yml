@@ -26,7 +26,7 @@ jobs:
         run: |
           pip cache purge
 
-      - name: Install dependencies
+      - name: Installing dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
@@ -34,12 +34,7 @@ jobs:
       - name: Finishing the Chrome process (if exists)
         run: |
           pkill -9 chrome || true
-          ps aux | grep chrome
-
-      - name: Verificar versões -- a apagar
-        run: |
-          python -m pytest --version
-          python -c "import pytest_bdd; print(pytest_bdd.__version__)"        
+          ps aux | grep chrome    
 
       - name: Run the tests
         run: |
