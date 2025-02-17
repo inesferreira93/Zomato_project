@@ -20,7 +20,7 @@ jobs:
       - name: Python configurations
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'  
+          python-version: '3.11'  
 
       - name: Clean pip cache
         run: |
@@ -28,11 +28,9 @@ jobs:
 
       - name: Install dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
-          python -m venv venv
-          source venv/bin/activate
+          python -m pip install --upgrade pip
           pip install -r requirements.txt
+          pip install pytest-bdd-report
         
       - name: Finishing the Chrome process (if exists)
         run: |
