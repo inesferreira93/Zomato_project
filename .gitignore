@@ -4,8 +4,9 @@ __pycache__/
 *$py.class
 .pytest_cache
 *.png
-.html
-.json
+*.html
+*.json
+*.css
 
 # Environments
 .env

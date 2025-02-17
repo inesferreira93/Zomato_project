@@ -2,6 +2,5 @@ selenium
 webdriver-manager
 pytest
 gherkin-official
-pytest-bdd
 python-dotenv
-pytest-bdd-report
+pytest-html
