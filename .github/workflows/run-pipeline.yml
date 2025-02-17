@@ -1,4 +1,4 @@
-name: Pipeline of the Testes
+name: E2e tests
 
 on:
   push:
@@ -38,7 +38,7 @@ jobs:
 
       - name: Run the tests
         run: |
-          pytest --html=report.html
+          pytest -v --bdd-report report
       
       - name: Upload of the html HTML repost as artifact
         uses: actions/upload-artifact@v4
