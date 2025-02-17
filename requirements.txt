@@ -3,4 +3,5 @@ webdriver-manager
 pytest
 gherkin-official
 python-dotenv
+pytest-bdd-report
 pytest-html
