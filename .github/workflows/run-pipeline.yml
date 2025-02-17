@@ -1,4 +1,4 @@
-name: Pipeline of the Testes
+name: E2e tests
 
 on:
   push:
@@ -20,29 +20,32 @@ jobs:
       - name: Python configurations
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'  
+          python-version: '3.11'  
 
       - name: Clean pip cache
         run: |
           pip cache purge
 
-      - name: Install dependencies
+      - name: Installing dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
-          python -m venv venv
-          source venv/bin/activate
+          python -m pip install --upgrade pip
           pip install -r requirements.txt
         
       - name: Finishing the Chrome process (if exists)
         run: |
           pkill -9 chrome || true
-          ps aux | grep chrome
+          ps aux | grep chrome    
 
       - name: Run the tests
         run: |
-          source venv/bin/activate
-          pytest -s
+          pytest --html=report.html
+
+      
+      - name: Upload of the html HTML repost as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pytest-bdd-report-html
+          path: report.html
 
       - name: Upload Screenshots
         if: always()

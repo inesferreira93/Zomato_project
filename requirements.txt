@@ -1,6 +1,7 @@
-selenium
-webdriver-manager
-pytest
-gherkin-official
-pytest-bdd
-python-dotenv
+selenium>=4.21.0
+webdriver-manager>=4.0.1
+pytest>=8.2.0
+pytest-html>=4.1.1 
+gherkin-official>=29.0.0
+python-dotenv>=0.19.2
+pytest-bdd>=8.0.0
