@@ -4,3 +4,4 @@ pytest
 gherkin-official
 pytest-bdd
 python-dotenv
+pip install pytest-bdd-report
