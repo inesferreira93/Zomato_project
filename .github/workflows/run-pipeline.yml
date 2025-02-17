@@ -30,7 +30,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install pytest-bdd-report
         
       - name: Finishing the Chrome process (if exists)
         run: |
@@ -39,7 +38,6 @@ jobs:
 
       - name: Run the tests
         run: |
-          source venv/bin/activate
           pytest --bdd-report-html report.html
       
       - name: Upload of the html HTML repost as artifact
