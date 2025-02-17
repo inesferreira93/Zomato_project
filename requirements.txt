@@ -1,7 +1,7 @@
 selenium
 webdriver-manager
-pytest
+pytest "pytest>=7.0,<8.0"
 gherkin-official
-pytest-bdd
+pytest-bdd==6.1.1
 python-dotenv
 pytest-bdd-report

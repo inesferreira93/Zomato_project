@@ -36,6 +36,11 @@ jobs:
           pkill -9 chrome || true
           ps aux | grep chrome
 
+      - name: Verificar versões -- a apagar
+        run: |
+          python -m pytest --version
+          python -c "import pytest_bdd; print(pytest_bdd.__version__)"        
+
       - name: Run the tests
         run: |
           pytest --bdd-report-html report.html
